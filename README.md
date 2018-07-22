@@ -7,6 +7,7 @@ React App which displays traversals like inorder, preorder, post order and bread
 * git clone https://github.com/guptasaransh76/BinaryTree-traversals.git
 * cd BinaryTree-traversals
 * npm install
+* npm start
 > Browse to htpp://localhost:3000
 
 ## Landing Page
