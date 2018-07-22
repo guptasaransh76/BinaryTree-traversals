@@ -1,0 +1,34 @@
+.dupapp{
+	height: 80vh;
+	width: 100%;
+	width: 100%;
+	background: #f7f7f7;
+	padding: 25px;
+
+}
+
+.form-st{
+	margin: 0 auto;
+    width: 50vw; 
+}
+
+.error {
+	color: red;
+	font-size: 10px;
+	margin-top: -2vh;
+}
+
+.back {
+	margin-left: 5vw;
+}
+
+.bgroup{
+	margin-top: 5vh;
+	margin-left: -5vw;
+}
+
+.results{
+	margin: 0 auto;
+	width: 50%;
+	margin-top: 4vh;
+}

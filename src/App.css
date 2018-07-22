@@ -1,29 +1,12 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
-}
-
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-title {
-  font-size: 1.5em;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-
 * {margin: 0; padding: 0;}
+
+.Nav{
+  height: 8vh;
+  width: 100%;
+  background: black;
+}
+
+
 
 .tree ul {
   padding-top: 20px; position: relative;
@@ -115,10 +98,87 @@ right connector from last child*/
 }
 
 .res{
-  margin-top: 20vh;
-  color: red;
+  color: black;
   font-size: 25px;
   font-family: verdana;
+  border: 1px solid black;
+  background: #f7f7f7;
+  margin-left: 2vw;
+  margin-right: 2vw;
+  width: 25vw;
+  padding-left: 3px;
+  padding-right: 3px;
+  text-align: center;
+}
+
+.partition {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.left {
+    display: flex;
+    width: 30vw;
+    height: 80vh;
+    background-color: white;
+    flex-direction: column;
+    padding: 30px;
+
+}
+
+.leftbox{
+  background:  #f7f1ef;
+  margin: 0 auto;
+
+}
+
+.right {
+    width: 70vw;
+    background: #f7f7f7;
+    align-content: center;
+    padding-top: 7vh;
+    margin: 0 auto;
+}
+
+
+.primary{
+  margin-top: 15vh;
+  letter-spacing: 1px;
+}
+
+
+.infobox{
+  margin-top: 4vh;
+  padding: 30px;
+  height: 25vh;
+  width: 100%;
+  margin-bottom: 3vh;
+}
+
+.para{
+  padding: 20px;
+  border: 1px solid black;
+  border-style: dotted;
+
+}
+
+.select{
+  width: 50vw;
+  margin-left: 10vw;
+}
+
+.button-gr{
+  margin-left: 30vw;
+}
+
+.name{
+  color: white;
+  font-family: sans-serif;
+  padding-left: 4vw;
+  padding-top: 15px;
+  font-size: 22px;
+  opacity: 0.8;
+  letter-spacing: 3px;
 }
 /*Time for some hover effects*/
 /*We will apply the hover effect the the lineage of the element also*/

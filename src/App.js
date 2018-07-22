@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import Paragraph from './js/paragraph';
+import Tree from './js/tree';
+import Next from './js/Next';
+import Right from './js/right';
+import {makeBinaryTree} from "./js/calls";
+
 
 class App extends Component {
   constructor(props){
@@ -8,56 +14,18 @@ class App extends Component {
       rootNode: null,
       results: [],
       name: '',
+      onOne: true,
     }
   }
 
-
-  makeBinaryTree = () => {
-
-    function newNode(val) {
-      this.val = val;
-      this.left = null;
-      this.right = null;
-    };
-
-    var currentNode = new newNode(34);
-
-    var rootNode = new newNode();
-    rootNode = currentNode;
-    // console.log(rootNode);
-
-    currentNode.right = new newNode(92);
-    currentNode.left = new newNode(23);
-    currentNode = currentNode.left;
-    currentNode.left = new newNode(12);
-    currentNode.right = new newNode(4);
-    currentNode = currentNode.right;
-    currentNode.left = new newNode(16);
-    currentNode.right = new newNode(9);
-
-    return rootNode;
-  }
-
-    // getClass(){
-    //   var doc = document.querySelector("selected-node");
-    //   console.log(doc);
-    // }
-
   componentWillMount() {
     console.log('component is mounting');
-    var rNode = this.makeBinaryTree();
+    var rNode = makeBinaryTree();
     this.setState({
       ...this.state,
       rootNode: rNode
     }, () => console.log('state', this.state));
 
-    // this.getClass();
-  }
-
-
-  runfun(a){
-   var res = document.querySelector('#res');
-   res.innerHTML += a;
   }
 
   preOrderTraversal(root, arr) {
@@ -113,7 +81,6 @@ class App extends Component {
     if (root.right) {
       this.inOrderTraversal(root.right, arr);
     }
-
   }
 
   funinOrd(val){
@@ -124,18 +91,42 @@ class App extends Component {
       ...this.state,
       results: array
     }, () => console.log('results', this.state.results));
-    this.runfun(array);
-
   };
 
 
-
-
-
   onChangeVal = (e) => {
+    var ib = document.querySelector('#infobox');
+    var id = e.target.value;
+    if(id === "pre"){
+      const string = `<p class="card para"><strong>Algorithm Preorder(tree)<br />
+       1. Visit the root.<br />
+       2. Traverse the left subtree, i.e., call Preorder(left-subtree)<br />
+       3. Traverse the right subtree, i.e., call Preorder(right-subtree) </strong></p>`;
+      ib.innerHTML = string;    
+    } else if(id === "post"){
+        const string = `<p class="card para"><strong>Algorithm Postorder(tree)<br />
+         1. Traverse the left subtree, i.e., call Postorder(left-subtree)<br />
+         2. Traverse the right subtree, i.e., call Postorder(right-subtree)<br />
+         3. Visit the root.</strong></p>`;
+      ib.innerHTML = string;
+    }else if(id === "in"){
+      const string = `<p class="card para"><strong>Algorithm Inorder(tree)<br />
+        1. Traverse the left subtree, i.e., call Inorder(left-subtree)<br />
+        2. Visit the root.<br />
+        3. Traverse the right subtree, i.e., call Inorder(right-subtree)</strong></p>`;
+
+      ib.innerHTML = string;
+    } else if(id === "breadth"){
+      const string = `<p class="card para"><strong>1. Set up a queue to track which nodes to visit.<br />
+        2. Add the root to the queue. <br />3. Until the queue is empty, process the first node in the queue with the following steps:<br />
+        (i) remove the node from the front of the queue<br />(ii) add the nodes children to the back of the queue<br />
+        (iii) do whatever additional processing you would like!</strong></p>`;
+      ib.innerHTML = string;
+    }
+
    this.setState({
     ...this.state,
-    name: e.target.id
+    name: e.target.value
    }, () => {console.log('state', this.state)});
 
   }
@@ -154,10 +145,21 @@ class App extends Component {
     }
   }
 
+  handleNextApp = () => {
+    this.setState({
+      ...this.state,
+      onOne: false
+    });
+  }
+
+handleback = () => {
+    this.setState({
+      ...this.state,
+      onOne: true
+    });
+  }
  componentDidMount() {
     const element = document.querySelector('#list');
-
-    // var element = elements.forEach((val))
     console.log(element);
     this.setState({
       ...this.state,
@@ -168,53 +170,30 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div className="tree">
-          <ul>
-            <li id="list">
-              <a id="a">34</a>
-              <ul>
-                <li>
-                  <a>23</a>
-                  <ul>
-                    <li><a>12</a></li>
-                    <li>
-                      <a>04</a>
-                       <ul>
-                        <li><a>16</a></li>
-                        <li><a>09</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li>
-                  <a>92</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-
+        <div className="Nav">
+            <p className="card-title name"> ClariSight Assignment</p>
           </div>
 
+          {this.state.onOne && 
+            <div className="partition">
+            <Tree 
+            results={this.state.results}
+            />
+            <Right 
+            handleSubmit={this.handleSubmit}
+            onChangeVal={this.onChangeVal}
+            handleNextApp={this.handleNextApp}
+            />
+          </div>
+          }
+          {!this.state.onOne && 
+            <Next 
+            handleback={this.handleback}
+            />
 
-        <div className="btn-group" role="group">
-          <button type="button" className="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Traversals
-            <span className="caret"></span>
-          </button>
-          <ul className ="dropdown-menu" >
-            <li><a id="pre" onClick={this.onChangeVal}>Pre Order</a></li>
-            <li><a id="post" onClick={this.onChangeVal}>Post Order</a></li>
-            <li><a id="in" onClick={this.onChangeVal}>In Order</a></li>
-            <li><a id="breadth" onClick={this.onChangeVal}>Breadth Order</a></li>
-          </ul>
+          }
+
         </div>
-
-        <button type="button" className="btn btn-default" onClick={this.handleSubmit}> pre </button><br />          
-
-        <div>
-          <p id="res" className="res"> {[this.state.result]}</p>
-        </div>
-      </div>
     );
   }
 }
